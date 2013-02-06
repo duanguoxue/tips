@@ -1,0 +1,17 @@
+#!/bin/sh
+#author:dgx 2012-01-06 12:00
+
+if [ 1 -ne $# ];then
+	echo "用法:"$0 "<pid>"
+	exit
+fi
+PID=$1;
+PRONAME="backtrace";
+if [ -d "/proc/"$1 ];then 
+
+	gdb --batch --quiet -ex="thread apply all bt" -p $PID | cat > $PRONAME"_gdb_"$PID\.txt;
+	echo $PRONAME"_gdb_"$PID\.txt;
+else
+	echo "no such process";
+	exit ;
+fi
