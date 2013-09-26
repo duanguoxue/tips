@@ -9,8 +9,8 @@ int main(int argc, char **argv) {
     void *handle;
     void (*hello_fun)();
     char *error;
-
-    handle = dlopen ("/root/dl/libtest.so", RTLD_LAZY);
+    handle = dlopen (argv[1], RTLD_LAZY);
+    //handle = dlopen ("/root/dl/libtest.so", RTLD_LAZY);
     if (!handle) {
         fprintf (stderr, "%s ", dlerror());  
         return 0;
