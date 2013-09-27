@@ -1,0 +1,13 @@
+digraph mongo_cxx_dot {
+ //inheritance level
+ edge [color=purple,arrowtail="empty",dir="back"];
+ PeriodicTask->DBConnectionPool;
+ DBClientBase->DBClientConnection;
+ AScopedConnection->ScopedDbConnection;
+ 
+ //dependency level
+ edge [color=green,arrowhead="normal",dir="forward"];
+ DBConnectionPool->PoolForHost->StoredConnection->DBClientBase;
+ DBConnectionPool->ConnectionString->DBClientConnection;
+ ScopedDbConnection->{ DBClientBase DBConnectionPool};
+}
