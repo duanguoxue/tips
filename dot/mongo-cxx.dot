@@ -1,4 +1,5 @@
 digraph mongo_cxx_dot {
+ //mongo cxx driver  libmongoclient.a class diagram
  //inheritance level
  edge [color=purple,arrowtail="empty",dir="back"];
  PeriodicTask->DBConnectionPool;
@@ -8,6 +9,7 @@ digraph mongo_cxx_dot {
  //dependency level
  edge [color=green,arrowhead="normal",dir="forward"];
  DBConnectionPool->PoolForHost->StoredConnection->DBClientBase;
- DBConnectionPool->ConnectionString->DBClientConnection;
+ DBConnectionPool->ConnectionString->DBClientConnection->MessagingPort->Socket;
  ScopedDbConnection->{ DBClientBase DBConnectionPool};
+ {rank=same;ScopedDbConnection;DBClientConnection;}
 }
