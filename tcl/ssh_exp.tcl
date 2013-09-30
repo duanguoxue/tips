@@ -131,7 +131,7 @@ proc remoteExecute { ssh_id cmd} {
 
     return $retVal
 }
-
+set test_ssh_r {
 # example 
 # "[duanguoxue@Test ~]$" prompt is "Test"
 set prompt_r "Test"
@@ -149,4 +149,6 @@ puts "result:$status"
 
 closeSsh $id
 closeSsh $id2
+}
 
+#eval $test_ssh_r
