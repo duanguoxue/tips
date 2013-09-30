@@ -1,4 +1,4 @@
-#!/bin/tclsh
+#!/bin/env tclsh
 # author: duanguoxue
 # date: 2013-07-01
 package require Expect
@@ -80,18 +80,20 @@ proc openSsh {username password address port pr } {
     }
 
     set local_spawn_id $spawn_id
-
-    remoteExecute $local_spawn_id $pr "stty -onlcr"
-    return $local_spawn_id
+    set res_sp_id [list $local_spawn_id $pr]
+    remoteExecute $res_sp_id "stty -onlcr"
+    return $res_sp_id
 }
 
 proc closeSsh {spawnid} {
-    close $spawnid
+    close [lindex $spawnid 0]
 }
 
-proc remoteExecute {spawnid pr cmd} {
+proc remoteExecute { ssh_id cmd} {
     global expect_out timeout
 
+    set spawnid [lindex $ssh_id 0]
+    set pr [lindex $ssh_id 1]
     set sshcmd $cmd
     set prompt [format "%s%s" $pr {.*(\$|%|#|>) *$}]
     exp_send -i $spawnid "$sshcmd\r"
@@ -131,10 +133,20 @@ proc remoteExecute {spawnid pr cmd} {
 }
 
 # example 
-set prompt_r buildserver199
-#set id [openSsh root 123456 127.0.0.1 22 localhost]
-set id [openSsh root 123qwe 10.199.1.199 22 $prompt_r]
-set status [remoteExecute $id $prompt_r "cd /root"]
-set status [remoteExecute $id $prompt_r ls]
+# "[duanguoxue@Test ~]$" prompt is "Test"
+set prompt_r "Test"
+set id [openSsh duanguoxue 123456 192.168.1.112 22 $prompt_r]
+set status [remoteExecute $id  "cd /root"]
+set status [remoteExecute $id  "ls"]
+puts "result:$status:$id"
+
+set id2 [openSsh duanguoxue 123456 192.168.1.112 22 $prompt_r]
+set status [remoteExecute $id2  "cd /root"]
+set status [remoteExecute $id2  "ls"]
+puts "result:$status:$id2"
+set status [remoteExecute $id2  "pwd"]
 puts "result:$status"
+
 closeSsh $id
+closeSsh $id2
+
