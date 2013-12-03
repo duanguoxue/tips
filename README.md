@@ -3,14 +3,10 @@
 
 c/library_t 
 ----
-测试c dlopen 调用动态库，获取全局对象地址
+测试c dlopen 调用动态库，获取全局对象地址（全局变量），非函数地址
 ----
 dot/mongo-cxx.dot
 使用mongo cxx 驱动过程中用 graphviz dot 画的类图
-
-screen
-----
-screen 配置文件 配置使用caption
 
 tcl/ssh_exp.tcl
 ----
@@ -26,4 +22,8 @@ expect 直接ssh到远程机器，功能与 sshpass相同，配置ssh密码内�
 shell/bash_socket.sh
 ----
 bash socket example
+
+screen
+----
+screen 配置文件 配置使用caption
 
