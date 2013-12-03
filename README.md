@@ -4,7 +4,7 @@
 c/library_t 
 ----
 测试c dlopen 调用动态库，获取全局对象地址（全局变量），非函数地址
-----
+
 dot/mongo-cxx.dot
 使用mongo cxx 驱动过程中用 graphviz dot 画的类图
 
