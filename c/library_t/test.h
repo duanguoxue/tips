@@ -9,6 +9,8 @@ struct test_dl{
     hello_t func;
 };
 
-void hello();
+extern "C" {
+    void hello();
+}
 #endif
 
