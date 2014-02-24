@@ -1,0 +1,25 @@
+#!/bin/bash
+# how to use
+# compile->testinit->runtest->gencoveragereport->testcleanup
+
+CXXFLAGS=$CXXFLAGS" -fprofile-arcs -ftest-coverage -g" 
+TestInit(){
+    # initial coverage data
+    lcov -c -i -d ./ -o .coverage.base
+}
+
+GenCoverageReport(){
+    local reportname=$1
+    # generate coverage report
+    lcov -c -d ./ -o .coverage.run
+    lcov -d ./ -a .coverage.base -a .coverage.run -o .coverage.total
+    genhtml -o ${reportname}lcov_unittest/ .coverage.total
+}
+TestCleanUp() {
+    local dir=$1
+    # cleanup
+    rm ${dir}./*.gc*
+    rm ${dir}.coverage.*
+}
+
+
