@@ -3,6 +3,7 @@
 #include "test.h"
 /* 
  * dynamic get global variable and function
+ * c++ http://www.faqs.org/docs/Linux-mini/C++-dlopen.html
  * could using "nm" check function symbol
  */
 void hello_m() {

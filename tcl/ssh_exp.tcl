@@ -151,4 +151,4 @@ closeSsh $id
 closeSsh $id2
 }
 
-eval $test_ssh_r
+#eval $test_ssh_r
