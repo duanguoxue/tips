@@ -28,3 +28,6 @@ screen
 ----
 screen 配置文件 配置使用caption
 
+coverage
+----
+coverage c++ 通过lcov genhtml 生成html测试报告
