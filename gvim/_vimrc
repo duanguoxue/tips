@@ -1,0 +1,85 @@
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
+"----------------------------------------------------------------
+"配置多语言环境,解决中文乱码问题
+if has("multi_byte") 
+    " UTF-8 编码 
+    set encoding=utf-8 
+    set termencoding=utf-8 
+    set formatoptions+=mM 
+    set fencs=utf-8,gbk 
+    if v:lang =~? '^/(zh/)/|/(ja/)/|/(ko/)' 
+        set ambiwidth=double 
+    endif 
+    if has("win32") 
+        source $VIMRUNTIME/delmenu.vim 
+        source $VIMRUNTIME/menu.vim 
+        language messages zh_CN.utf-8 
+    endif 
+else 
+    echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte" 
+endif
+
+
+"设置语法高亮
+set nu!
+colorscheme desert 
+syntax enable 
+syntax on
+
+" win file manager
+let g:winManagerWindowLayout='FileExplorer' 
+nmap wm :WMToggle<CR>
+
+set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
+
+
+"设置tab=4
+set shiftwidth=4
+set sts=4
+set tabstop=4
+ 
+"tab->空格
+set expandtab
+ 
+"不备份
+set nobackup
+set nowritebackup
+ 
+"不要工具条,菜单栏
+set guioptions-=T
+set guioptions-=m
+
+"启动gVIM时最大化
+au GUIEnter * simalt ~x
+
+
+
