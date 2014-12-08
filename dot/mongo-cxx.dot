@@ -1,6 +1,6 @@
 digraph mongo_cxx_dot {
  //mongo cxx driver  libmongoclient.a class diagram
- //dot -Tpng mongo-cxx.dot mongo-cxx.png
+ //dot -Tpng mongo-cxx.dot -o mongo-cxx.png
  //inheritance level
  edge [color=purple,arrowtail="empty",dir="back"];
  PeriodicTask->DBConnectionPool;
