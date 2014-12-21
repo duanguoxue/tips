@@ -3,6 +3,7 @@
 # gen base function code coverage report
 # default open http 8000 port to check report
 # requirement : lcov genthml python 
+# can use for blade build tools
 
 lcov -b ./ -c -i -d ./ -o .coverage.base
 lcov -b ./ -c -d ./ -o .coverage.run
