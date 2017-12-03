@@ -1,0 +1,7 @@
+git config --global alias.root 'rev-parse --show-toplevel'
+git config --global alias.co 'checkout'
+git config --global alias.st 'status'
+git config --global alias.syncsub '!f(){ git submodule init && git submodule sync && git submodule update --init --recursive; git branch -a |grep "*" && git st -s;}; f'
+git config --global alias.corb '!rbcheckout(){ git checkout $@ && git syncsub; }; rbcheckout '
+git config --global alias.up '!git pull --rebase --all'
+git config --global alias.sync '!echo "git syncsub" && git syncsub; echo "git pull --rebase --all"  && git up'
